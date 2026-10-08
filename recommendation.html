@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fashion Recommendation</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            color: white;
+            background: linear-gradient(135deg,#08001c,#20003e,#001b35);
+            overflow-x: hidden;
+        }
+
+        .bubble {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(4px);
+            opacity: .45;
+            z-index: -1;
+            animation: float 8s infinite ease-in-out;
+        }
+
+        .b1 {
+            width: 230px;
+            height: 230px;
+            background: #8b5cf6;
+            top: 5%;
+            left: 5%;
+        }
+
+        .b2 {
+            width: 200px;
+            height: 200px;
+            background: #ec4899;
+            bottom: 5%;
+            right: 5%;
+            animation-delay: 2s;
+        }
+
+        .b3 {
+            width: 100px;
+            height: 100px;
+            background: #2196f3;
+            left: 45%;
+            top: 35%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%,100% { transform: translate(0,0); }
+            50% { transform: translate(40px,-40px); }
+        }
+
+        nav {
+            padding: 18px 6%;
+            display: flex;
+            justify-content: space-between;
+            background: rgba(255,255,255,.08);
+            backdrop-filter: blur(15px);
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 850px;
+            margin: 45px auto;
+            padding: 35px;
+            text-align: center;
+            border-radius: 28px;
+            background: rgba(255,255,255,.10);
+            border: 1px solid rgba(255,255,255,.2);
+            backdrop-filter: blur(20px);
+        }
+
+        .details {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .tag {
+            padding: 10px 16px;
+            border-radius: 20px;
+            background: rgba(255,255,255,.15);
+        }
+
+        .image-box {
+            margin: 25px auto;
+            width: 320px;
+            min-height: 320px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 22px;
+            background: rgba(255,255,255,.08);
+            overflow: hidden;
+        }
+
+        .image-box img {
+            width: 100%;
+            max-height: 420px;
+            object-fit: contain;
+            border-radius: 20px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 25px;
+            border: none;
+            border-radius: 13px;
+            color: white;
+            background: linear-gradient(90deg,#8b5cf6,#ec4899);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        #message {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="bubble b1"></div>
+<div class="bubble b2"></div>
+<div class="bubble b3"></div>
+
+<nav>
+    <h2>✨ Fashion Trend</h2>
+
+    <div>
+        <a href="/home">Home</a>
+        <a href="/trend">Create Trend</a>
+        <a href="/feedback">Feedback</a>
+        <a href="/logout">Logout</a>
+    </div>
+</nav>
+
+<div class="container">
+
+    <h1>✨ Your Fashion Recommendation</h1>
+
+    <div class="details">
+        <div class="tag" id="gender">Gender</div>
+        <div class="tag" id="season">Season</div>
+        <div class="tag" id="category">Category</div>
+        <div class="tag" id="colour">Colour</div>
+        <div class="tag" id="style">Style</div>
+    </div>
+
+    <div class="image-box" id="imageBox">
+        <p>Generating recommendation...</p>
+    </div>
+
+    <div id="message"></div>
+
+    <div class="buttons">
+        <a href="/trend" class="btn">Create Another</a>
+        <a href="/feedback" class="btn">Give Feedback</a>
+    </div>
+
+</div>
+
+<script>
+async function loadRecommendation() {
+
+    try {
+
+        const trendResponse = await fetch("/api/latest-trend");
+        const trendData = await trendResponse.json();
+
+        if (!trendData.success) {
+            document.getElementById("message").textContent =
+                "No trend found.";
+            return;
+        }
+
+        const trend = trendData.trend;
+
+        document.getElementById("gender").textContent =
+            "Gender: " + trend.gender;
+
+        document.getElementById("season").textContent =
+            "Season: " + trend.season;
+
+        document.getElementById("category").textContent =
+            "Category: " + trend.category;
+
+        document.getElementById("colour").textContent =
+            "Colour: " + trend.colour;
+
+        document.getElementById("style").textContent =
+            "Style: " + trend.style;
+
+
+        const imageResponse =
+            await fetch("/api/recommendation-image");
+
+        const imageData = await imageResponse.json();
+
+        const imageBox = document.getElementById("imageBox");
+
+        if (imageData.success) {
+
+            imageBox.innerHTML = `
+                <img src="${imageData.image}"
+                     alt="Fashion Recommendation">
+            `;
+
+        } else {
+
+            imageBox.innerHTML =
+                "<p>Fashion image not found.</p>";
+        }
+
+    } catch (error) {
+
+        document.getElementById("message").textContent =
+            "Unable to generate recommendation.";
+    }
+}
+
+loadRecommendation();
+</script>
+
+</body>
+</html>

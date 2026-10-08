@@ -1,0 +1,12 @@
+FASHION TREND CREATION SYSTEM
+==========================================
+Database : c:\Users\acer\OneDrive\Desktop\Fashion Trend Creation\fashion_trend.db
+Images   : c:\Users\acer\OneDrive\Desktop\Fashion Trend Creation\images
+Server   : http://127.0.0.1:5000
+------------------------------------------
+Admin Username : admin01
+Admin Password : admin1234
+==========================================
+
+ * Debugger is active!
+ * Debugger PIN: 135-951-794

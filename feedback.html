@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fashion Trend - Feedback</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            background: linear-gradient(135deg,#08001c,#21003f,#001c38);
+            overflow: hidden;
+        }
+
+        .bubble {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(4px);
+            opacity: .45;
+            animation: float 8s infinite ease-in-out;
+        }
+
+        .b1 {
+            width: 220px;
+            height: 220px;
+            background: #8b5cf6;
+            top: 5%;
+            left: 5%;
+        }
+
+        .b2 {
+            width: 190px;
+            height: 190px;
+            background: #ec4899;
+            bottom: 5%;
+            right: 5%;
+        }
+
+        .b3 {
+            width: 90px;
+            height: 90px;
+            background: #2196f3;
+            left: 45%;
+            top: 35%;
+        }
+
+        @keyframes float {
+            0%,100% { transform: translate(0,0); }
+            50% { transform: translate(40px,-35px); }
+        }
+
+        .card {
+            width: 450px;
+            padding: 35px;
+            border-radius: 25px;
+            background: rgba(255,255,255,.10);
+            border: 1px solid rgba(255,255,255,.2);
+            backdrop-filter: blur(20px);
+            text-align: center;
+        }
+
+        select,
+        textarea {
+            width: 100%;
+            padding: 14px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 12px;
+            outline: none;
+        }
+
+        textarea {
+            height: 130px;
+            resize: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 18px;
+            border: none;
+            border-radius: 13px;
+            background: linear-gradient(90deg,#8b5cf6,#ec4899);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 18px;
+            color: #d8b4fe;
+            text-decoration: none;
+        }
+
+        #message {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="bubble b1"></div>
+<div class="bubble b2"></div>
+<div class="bubble b3"></div>
+
+<div class="card">
+
+    <h1>💜 Feedback</h1>
+    <p>Tell us about your recommendation</p>
+
+    <select id="rating">
+        <option value="5">★★★★★ - Excellent</option>
+        <option value="4">★★★★ - Very Good</option>
+        <option value="3">★★★ - Good</option>
+        <option value="2">★★ - Average</option>
+        <option value="1">★ - Poor</option>
+    </select>
+
+    <textarea id="feedback"
+        placeholder="Enter your feedback"></textarea>
+
+    <button onclick="submitFeedback()">
+        Submit Feedback
+    </button>
+
+    <div id="message"></div>
+
+    <a href="/home">← Back to Home</a>
+
+</div>
+
+<script>
+async function submitFeedback() {
+
+    const rating =
+        document.getElementById("rating").value;
+
+    const feedback =
+        document.getElementById("feedback").value.trim();
+
+    const message =
+        document.getElementById("message");
+
+    try {
+
+        const response = await fetch("/api/feedback", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                rating,
+                feedback
+            })
+        });
+
+        const data = await response.json();
+
+        message.textContent = data.message;
+
+        if (data.success) {
+            document.getElementById("feedback").value = "";
+        }
+
+    } catch (error) {
+
+        message.textContent =
+            "Server connection error.";
+    }
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,537 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Fashion Trend - Login</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #09001b, #220044, #001b38);
+            color: white;
+            overflow: hidden;
+        }
+
+        /* Floating Background */
+
+        .bubble {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(3px);
+            opacity: 0.5;
+            animation: move 8s infinite ease-in-out;
+        }
+
+        .one {
+            width: 230px;
+            height: 230px;
+            background: #8b5cf6;
+            top: 5%;
+            left: 5%;
+        }
+
+        .two {
+            width: 180px;
+            height: 180px;
+            background: #ec4899;
+            bottom: 5%;
+            right: 8%;
+            animation-delay: 2s;
+        }
+
+        .three {
+            width: 100px;
+            height: 100px;
+            background: #2196f3;
+            bottom: 30%;
+            left: 15%;
+            animation-delay: 4s;
+        }
+
+        @keyframes move {
+
+            0%, 100% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(45px, -40px);
+            }
+
+        }
+
+        /* Login Card */
+
+        .card {
+            width: 390px;
+            padding: 35px;
+            border-radius: 28px;
+            background: rgba(255, 255, 255, 0.11);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            text-align: center;
+            z-index: 2;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            margin: 5px 0 8px;
+            font-size: 25px;
+        }
+
+        .subtitle {
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+
+        /* Input */
+
+        input {
+            width: 100%;
+            padding: 14px;
+            margin: 9px 0;
+            border: none;
+            outline: none;
+            border-radius: 13px;
+            background: rgba(255, 255, 255, 0.14);
+            color: white;
+            font-size: 15px;
+        }
+
+        input::placeholder {
+            color: #ddd;
+        }
+
+        input:focus {
+            box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.7);
+        }
+
+        /* Login Button */
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 13px;
+            background: linear-gradient(90deg, #8b5cf6, #ec4899);
+            color: white;
+            font-weight: bold;
+            font-size: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(236, 72, 153, 0.35);
+        }
+
+        a {
+            color: #d8b4fe;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #ff9fdb;
+        }
+
+        /* Popup Background */
+
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(6px);
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+
+        /* Popup Box */
+
+        .popup {
+            width: 350px;
+            padding: 30px;
+            border-radius: 22px;
+            text-align: center;
+
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(25px);
+
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+
+            animation: popupOpen 0.3s ease;
+        }
+
+        @keyframes popupOpen {
+
+            from {
+                transform: scale(0.7);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+        }
+
+        .popup-icon {
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
+
+        .popup h2 {
+            margin: 5px 0 10px;
+        }
+
+        .popup p {
+            color: #ddd;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .popup button {
+            margin-top: 15px;
+            width: 120px;
+            padding: 12px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(90deg, #8b5cf6, #ec4899);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .popup button:hover {
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 500px) {
+
+            .card {
+                width: 90%;
+                padding: 28px 22px;
+            }
+
+            .popup {
+                width: 85%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Floating Background -->
+
+    <div class="bubble one"></div>
+    <div class="bubble two"></div>
+    <div class="bubble three"></div>
+
+
+    <!-- Login Card -->
+
+    <div class="card">
+
+        <img
+            src="/images/Logo.jpeg"
+            class="logo"
+            alt="Fashion Trend Logo"
+        >
+
+        <h1>Fashion Trend Creation</h1>
+
+        <p class="subtitle">
+            Login to your account
+        </p>
+
+        <input
+            id="username"
+            type="text"
+            placeholder="Username"
+            autocomplete="username"
+        >
+
+        <input
+            id="password"
+            type="password"
+            placeholder="Password"
+            autocomplete="current-password"
+        >
+
+        <button
+            class="login-btn"
+            onclick="loginUser()"
+        >
+            Login
+        </button>
+
+        <p>
+            Don't have an account?
+            <a href="/register">Create Account</a>
+        </p>
+
+    </div>
+
+
+    <!-- Popup -->
+
+    <div
+        class="popup-overlay"
+        id="popupOverlay"
+    >
+
+        <div class="popup">
+
+            <div
+                class="popup-icon"
+                id="popupIcon"
+            >
+                ✨
+            </div>
+
+            <h2 id="popupTitle">
+                Message
+            </h2>
+
+            <p id="popupMessage">
+                Message
+            </p>
+
+            <button
+                id="popupButton"
+                onclick="closePopup()"
+            >
+                OK
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        /* ---------------------------------------
+           SHOW POPUP
+        --------------------------------------- */
+
+        function showPopup(title, message, icon) {
+
+            document.getElementById("popupTitle").textContent = title;
+
+            document.getElementById("popupMessage").textContent = message;
+
+            document.getElementById("popupIcon").textContent = icon;
+
+            document.getElementById("popupOverlay").style.display = "flex";
+
+            document.getElementById("popupButton").onclick = closePopup;
+        }
+
+
+        /* ---------------------------------------
+           CLOSE POPUP
+        --------------------------------------- */
+
+        function closePopup() {
+
+            document.getElementById("popupOverlay").style.display = "none";
+
+        }
+
+
+        /* ---------------------------------------
+           LOGIN FUNCTION
+        --------------------------------------- */
+
+        async function loginUser() {
+
+            const username =
+                document.getElementById("username").value.trim();
+
+            const password =
+                document.getElementById("password").value;
+
+
+            /* Empty Field Check */
+
+            if (!username || !password) {
+
+                showPopup(
+                    "Incomplete Details",
+                    "Please enter your username and password.",
+                    "⚠️"
+                );
+
+                return;
+            }
+
+
+            try {
+
+                const response = await fetch("/api/login", {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+
+                        username: username,
+                        password: password
+
+                    })
+
+                });
+
+
+                /* Check server response */
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Server returned an error."
+                    );
+
+                }
+
+
+                const data = await response.json();
+
+
+                /* ---------------------------------------
+                   LOGIN SUCCESS
+                --------------------------------------- */
+
+                if (data.success) {
+
+                    showPopup(
+                        "Login Successful!",
+                        "Welcome back! Click OK to continue.",
+                        "✅"
+                    );
+
+
+                    /*
+                       IMPORTANT:
+
+                       Admin  → /admin
+                       User   → /home
+                    */
+
+                    document.getElementById(
+                        "popupButton"
+                    ).onclick = function () {
+
+                        if (data.role === "admin") {
+
+                            window.location.href = "/admin";
+
+                        } else {
+
+                            window.location.href = "/home";
+
+                        }
+
+                    };
+
+                }
+
+
+                /* ---------------------------------------
+                   LOGIN FAILED
+                --------------------------------------- */
+
+                else {
+
+                    showPopup(
+                        "Login Failed",
+                        data.message ||
+                        "Invalid username or password.",
+                        "❌"
+                    );
+
+                }
+
+            }
+
+
+            /* ---------------------------------------
+               CONNECTION ERROR
+            --------------------------------------- */
+
+            catch (error) {
+
+                console.error(error);
+
+                showPopup(
+                    "Connection Error",
+                    "Unable to connect to the server. Please start Flask.",
+                    "⚠️"
+                );
+
+            }
+
+        }
+
+
+        /* ---------------------------------------
+           ENTER KEY LOGIN
+        --------------------------------------- */
+
+        document
+            .getElementById("password")
+            .addEventListener("keydown", function(event) {
+
+                if (event.key === "Enter") {
+
+                    loginUser();
+
+                }
+
+            });
+
+    </script>
+
+</body>
+
+</html>
+

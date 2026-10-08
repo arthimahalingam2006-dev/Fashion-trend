@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Fashion Trend - Home</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #08001c,
+                    #180035,
+                    #001c38
+                );
+
+            overflow-x: hidden;
+        }
+
+
+        /* ================= FLOATING BUBBLES ================= */
+
+        .bubble {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(5px);
+            opacity: .4;
+            z-index: -1;
+
+            animation:
+                float 8s infinite ease-in-out;
+        }
+
+        .b1 {
+            width: 230px;
+            height: 230px;
+
+            background: #8b5cf6;
+
+            top: 10%;
+            left: 5%;
+        }
+
+        .b2 {
+            width: 200px;
+            height: 200px;
+
+            background: #ec4899;
+
+            right: 5%;
+            bottom: 10%;
+
+            animation-delay: 2s;
+        }
+
+        .b3 {
+            width: 110px;
+            height: 110px;
+
+            background: #2196f3;
+
+            left: 50%;
+            top: 35%;
+
+            animation-delay: 4s;
+        }
+
+        .b4 {
+            width: 90px;
+            height: 90px;
+
+            background: #a855f7;
+
+            right: 20%;
+            top: 18%;
+
+            animation-delay: 1s;
+        }
+
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(40px, -35px);
+            }
+
+        }
+
+
+        /* ================= NAVBAR ================= */
+
+        nav {
+            display: flex;
+
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 18px 6%;
+
+            background:
+                rgba(255, 255, 255, .08);
+
+            backdrop-filter: blur(15px);
+
+            border-bottom:
+                1px solid rgba(255, 255, 255, .15);
+
+            position: sticky;
+            top: 0;
+
+            z-index: 10;
+        }
+
+        nav h2 {
+            margin: 0;
+            font-size: 22px;
+        }
+
+        nav a {
+            color: white;
+
+            text-decoration: none;
+
+            margin-left: 20px;
+
+            font-size: 15px;
+
+            transition: .3s;
+        }
+
+        nav a:hover {
+            color: #ff8bd1;
+        }
+
+
+        /* ================= HERO ================= */
+
+        .hero {
+            text-align: center;
+
+            padding:
+                75px 20px 35px;
+        }
+
+        .hero h1 {
+            font-size: 45px;
+
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            opacity: .85;
+
+            font-size: 18px;
+
+            margin-bottom: 10px;
+        }
+
+
+        /* ================= BUTTON ================= */
+
+        .btn {
+            display: inline-block;
+
+            margin-top: 25px;
+
+            padding:
+                15px 28px;
+
+            border-radius: 15px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #8b5cf6,
+                    #ec4899
+                );
+
+            color: white;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            transition: .3s;
+
+            box-shadow:
+                0 10px 25px
+                rgba(236, 72, 153, .25);
+        }
+
+        .btn:hover {
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 15px 30px
+                rgba(139, 92, 246, .35);
+        }
+
+
+        /* ================= IMAGE CARDS ================= */
+
+        .cards {
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: stretch;
+
+            gap: 25px;
+
+            flex-wrap: wrap;
+
+            padding:
+                25px 20px 60px;
+        }
+
+
+        .card {
+
+            width: 280px;
+
+            overflow: hidden;
+
+            text-align: center;
+
+            border-radius: 24px;
+
+            background:
+                rgba(255, 255, 255, .10);
+
+            border:
+                1px solid
+                rgba(255, 255, 255, .20);
+
+            backdrop-filter:
+                blur(15px);
+
+            box-shadow:
+                0 15px 35px
+                rgba(0, 0, 0, .30);
+
+            transition:
+                transform .35s,
+                box-shadow .35s;
+        }
+
+
+        .card:hover {
+
+            transform:
+                translateY(-10px);
+
+            box-shadow:
+                0 20px 45px
+                rgba(0, 0, 0, .40);
+        }
+
+
+        /* ================= CARD IMAGE ================= */
+
+        .card img {
+
+            width: 100%;
+
+            height: 330px;
+
+            object-fit: cover;
+
+            display: block;
+        }
+
+
+        /* ================= CARD CONTENT ================= */
+
+        .card-content {
+
+            padding:
+                18px 15px 22px;
+        }
+
+        .card h3 {
+
+            margin:
+                0 0 8px;
+
+            font-size: 21px;
+        }
+
+        .card p {
+
+            margin: 0;
+
+            color: #ddd;
+
+            font-size: 14px;
+        }
+
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 900px) {
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .card {
+                width: 300px;
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            nav {
+                flex-direction: column;
+
+                gap: 15px;
+            }
+
+            nav a {
+                margin:
+                    0 7px;
+            }
+
+            .hero {
+                padding-top: 50px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .card {
+                width: 90%;
+                max-width: 350px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= BACKGROUND ================= -->
+
+    <div class="bubble b1"></div>
+    <div class="bubble b2"></div>
+    <div class="bubble b3"></div>
+    <div class="bubble b4"></div>
+
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav>
+
+        <h2>
+            ✨ Fashion Trend
+        </h2>
+
+        <div>
+
+            <a href="/home">
+                Home
+            </a>
+
+            <a href="/trend">
+                Create Trend
+            </a>
+
+            <a href="/feedback">
+                Feedback
+            </a>
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero">
+
+        <h1>
+            Fashion Trend Creation System
+        </h1>
+
+        <p id="welcome">
+            Discover your fashion style ✨
+        </p>
+
+        <a
+            href="/trend"
+            class="btn"
+        >
+            Create New Trend ✨
+        </a>
+
+    </section>
+
+
+    <!-- ================= THREE IMAGE CARDS ================= -->
+
+    <div class="cards">
+
+
+        <!-- DENIM COLLECTION -->
+
+        <div class="card">c
+
+            <img
+                src="/images/denim_collection.jpeg"
+                alt="Denim Collection"
+                onerror="this.src='/images/jeans.jpeg'"
+            >
+
+            <div class="card-content">
+
+                <h3>
+                    👖 Denim Collection
+                </h3>
+
+                <p>
+                    Explore stylish and modern denim collections
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- WOMEN FASHION -->
+
+        <div class="card">
+
+            <img
+                src="/images/women_fashion.jpeg"
+                alt="Women Fashion"
+                onerror="this.src='/images/dress.jpeg'"
+            >
+
+            <div class="card-content">
+
+                <h3>
+                    👗 Women Fashion
+                </h3>
+
+                <p>
+                    Discover elegant and modern women fashion
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- MODERN TOPS -->
+
+        <div class="card">
+
+            <img
+                src="/images/modern_tops.jpeg"
+                alt="Modern Tops"
+                onerror="this.src='/images/tops.jpeg'"
+            >
+
+            <div class="card-content">
+
+                <h3>
+                    👚 Modern Tops
+                </h3>
+
+                <p>
+                    Discover stylish and trendy modern tops
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        async function loadUser() {
+
+            try {
+
+                const response =
+                    await fetch("/api/current-user");
+
+                const data =
+                    await response.json();
+
+
+                if (data.logged_in) {
+
+                    document.getElementById(
+                        "welcome"
+                    ).textContent =
+                        "Welcome, "
+                        + data.username
+                        + " ✨";
+
+                }
+
+            }
+
+            catch (error) {
+
+                console.log(
+                    "Unable to load user"
+                );
+
+            }
+
+        }
+
+
+        loadUser();
+
+    </script>
+
+
+</body>
+
+</html>
